@@ -42,7 +42,8 @@ int recall_frequencies(uint32_t *freqs)
       // Invalid frequency, abort reading
       freqs[ii] = 0;
       if(ii == 1) {
-        freqs[1] = 144710000; // Use this as default so that at least one frequency is valid.
+        // There is not a single valid frequency in the EEPROM!
+        freqs[1] = DEFAULT_TUNE_FREQ; // Use this as default so that at least one frequency is valid.
         freqs[2] = 145000000; // #### Debug to test dual frequencies
         ii = 2; // ########
       } else {
