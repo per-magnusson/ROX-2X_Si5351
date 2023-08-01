@@ -344,6 +344,7 @@ void loop()
  
   } else if(state == S_BUTTON_LOCK) { // ##################################    S_BUTTON_LOCK
     // The encoder is ignored in this state, need to press button 1 to unlock
+    rot_enc.write(0); // Do not collect encoder clicks in this state
     button1.update();
     if(button1.fell()) {
       last_button_time = millis();
@@ -408,6 +409,12 @@ void loop()
       if(edit_freq_idx > 9) {
         edit_freq_idx = 1;
       }
+      if(frequencies[edit_freq_idx] < MIN_TUNE_FREQ) {
+        frequencies[edit_freq_idx] = DEFAULT_TUNE_FREQ;
+      }
+      if(frequencies[edit_freq_idx] > MAX_TUNE_FREQ) {
+        frequencies[edit_freq_idx] = DEFAULT_TUNE_FREQ;
+      }      
     }
     button3.update();
     if(button3.fell()) {
@@ -416,6 +423,7 @@ void loop()
         frequencies[edit_freq_idx+1] = 0; // Make next frequency invalid to signal the number of valid frequencies
       }
       store_frequencies(frequencies);
+      max_frequency_idx = edit_freq_idx;
       freq = frequencies[1];
       current_freq_idx = 1;
       state = S_MENU_SHOW_SAVED;
