@@ -1,5 +1,6 @@
 static const uint32_t MAX_TUNE_FREQ = 146500000; // The 2m band is from 144 to 146 MHz, allow some margin
 static const uint32_t MIN_TUNE_FREQ = 143500000;
+static const uint32_t DEFAULT_TUNE_FREQ = 144600000;
 
 extern uint32_t frequencies[];
 
